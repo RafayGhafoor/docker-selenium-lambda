@@ -1,6 +1,7 @@
 from selenium import webdriver
 from tempfile import mkdtemp
 from selenium.webdriver.common.by import By
+import undetected-chromedriver as uc
 
 
 def handler(event=None, context=None):
@@ -18,7 +19,7 @@ def handler(event=None, context=None):
     options.add_argument(f"--data-path={mkdtemp()}")
     options.add_argument(f"--disk-cache-dir={mkdtemp()}")
     options.add_argument("--remote-debugging-port=9222")
-    chrome = webdriver.Chrome("/opt/chromedriver",
+    chrome = uc.Chrome("/opt/chromedriver",
                               options=options)
     chrome.get("https://example.com/")
     return chrome.find_element(by=By.XPATH, value="//html").text
